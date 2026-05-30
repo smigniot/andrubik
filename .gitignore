@@ -1,0 +1,24 @@
+# Gradle / Android
+.gradle/
+build/
+local.properties
+*.apk
+*.aab
+*.keystore
+*.jks
+captures/
+.cxx/
+.claude
+.kotlin
+
+# Generated web bundle (built from web/ via esbuild)
+app/src/main/assets/web/
+
+# Node
+node_modules/
+web/node_modules/
+
+# IDE
+.idea/
+*.iml
+.DS_Store

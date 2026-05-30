@@ -1,0 +1,14 @@
+{
+  "name": "andrubik-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Web assets (cubing.js scrambler + twisty viewer) bundled into the AndRubik APK.",
+  "scripts": {
+    "build": "node esbuild.config.mjs"
+  },
+  "dependencies": {
+    "cubing": "0.63.3",
+    "esbuild": "0.28.0"
+  }
+}

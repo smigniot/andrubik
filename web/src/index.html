@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>AndRubik Scrambler</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <twisty-player
+      id="player"
+      puzzle="3x3x3"
+      visualization="3D"
+      hint-facelets="none"
+      background="none"
+      control-panel="none"
+      experimental-setup-anchor="start"></twisty-player>
+
+    <pre id="scramble" class="scramble">Loading…</pre>
+
+    <div class="controls">
+      <button id="play" class="btn" type="button" aria-label="Play scramble">▶ Play</button>
+      <div class="speeds" role="group" aria-label="Animation speed">
+        <button class="btn speed" type="button" data-speed="0.5">0.5×</button>
+        <button class="btn speed" type="button" data-speed="1">1×</button>
+        <button class="btn speed" type="button" data-speed="2">2×</button>
+        <button class="btn speed" type="button" data-speed="4">4×</button>
+      </div>
+    </div>
+
+    <button id="regen" class="regen" type="button">New scramble</button>
+  </main>
+
+  <script type="module" src="scrambler.js"></script>
+</body>
+</html>

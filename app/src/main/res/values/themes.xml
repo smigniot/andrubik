@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.AndRubik" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/cube_green</item>
+        <item name="colorSecondary">@color/cube_red</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+    </style>
+
+    <!-- Fullscreen, no system bars distraction for the timer screen -->
+    <style name="Theme.AndRubik.Timer" parent="Theme.AndRubik">
+        <item name="android:windowBackground">@color/timer_bg_idle</item>
+    </style>
+</resources>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">AndRubik</string>
+    <string name="title_scrambler">Scrambler</string>
+    <string name="title_timer">Timer</string>
+
+    <string name="home_subtitle">3x3 Rubik\'s Cube</string>
+    <string name="open_scrambler">Scrambler</string>
+    <string name="open_timer">Timer</string>
+
+    <!-- Timer states -->
+    <string name="timer_idle">Touch and hold</string>
+    <string name="timer_ready">Release to start</string>
+    <string name="timer_tap_to_stop">Tap to stop</string>
+    <string name="timer_initial">0.00</string>
+</resources>

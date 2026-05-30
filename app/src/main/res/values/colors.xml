@@ -1,0 +1,17 @@
+<resources>
+    <!-- Standard Rubik's cube colors -->
+    <color name="cube_white">#FFFFFF</color>
+    <color name="cube_yellow">#FFD500</color>
+    <color name="cube_green">#009E60</color>
+    <color name="cube_blue">#0051BA</color>
+    <color name="cube_red">#C41E3A</color>
+    <color name="cube_orange">#FF5800</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Timer feedback -->
+    <color name="timer_bg_idle">#121212</color>
+    <color name="timer_bg_ready">#1B5E20</color>
+    <color name="timer_text">#FFFFFF</color>
+</resources>
