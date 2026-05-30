@@ -18,7 +18,10 @@ import java.util.Locale
  *   IDLE     -- touch down --> READY (armed, green)
  *   READY    -- finger up  --> RUNNING (timer starts the instant the hand leaves)
  *   RUNNING  -- touch down --> STOPPED (final time shown)
- *   STOPPED  -- touch down --> READY (arm the next solve)
+ *   STOPPED  -- screen touch ignored; only the explicit reset button --> IDLE
+ *
+ * Once stopped, screen touches are intentionally ignored so an accidental tap can't
+ * dismiss the recorded time. A subtle reset button clears it for the next solve.
  *
  * Timing uses SystemClock.elapsedRealtime() (monotonic). The display refreshes once
  * per animation frame while running.
@@ -55,14 +58,17 @@ class TimerFragment : Fragment() {
             }
             true
         }
+        binding.resetButton.setOnClickListener { reset() }
         return binding.root
     }
 
     private fun onPressDown() {
         when (state) {
             State.RUNNING -> stop()
-            State.IDLE, State.STOPPED -> arm()
-            State.READY -> { /* already armed */ }
+            State.IDLE -> arm()
+            // STOPPED ignores screen touches so the record isn't lost by accident;
+            // READY is already armed.
+            State.STOPPED, State.READY -> { /* no-op */ }
         }
     }
 
@@ -93,8 +99,21 @@ class TimerFragment : Fragment() {
         state = State.STOPPED
         b.timeText.removeCallbacks(tick)
         b.timeText.text = format(SystemClock.elapsedRealtime() - startElapsed)
-        b.hintText.setText(R.string.timer_idle)
         b.timerRoot.keepScreenOn = false
+        // Keep the result clean for a screenshot: hide the hint, reveal the
+        // subtle reset button as the only way to clear the time.
+        b.hintText.visibility = View.INVISIBLE
+        b.resetButton.visibility = View.VISIBLE
+    }
+
+    private fun reset() {
+        val b = binding ?: return
+        state = State.IDLE
+        b.timeText.text = getString(R.string.timer_initial)
+        b.hintText.setText(R.string.timer_idle)
+        b.hintText.visibility = View.VISIBLE
+        b.resetButton.visibility = View.GONE
+        b.timerRoot.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.timer_bg_idle))
     }
 
     override fun onPause() {

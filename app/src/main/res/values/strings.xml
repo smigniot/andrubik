@@ -12,4 +12,5 @@
     <string name="timer_ready">Release to start</string>
     <string name="timer_tap_to_stop">Tap to stop</string>
     <string name="timer_initial">0.00</string>
+    <string name="timer_reset">Reset timer</string>
 </resources>

@@ -29,4 +29,19 @@
         android:textSize="18sp"
         android:alpha="0.7" />
 
+    <!-- Subtle reset: only shown once a time is recorded, so an accidental
+         screen touch can't dismiss the record. Kept faint/borderless so it
+         stays out of the way of a celebratory screenshot. -->
+    <ImageButton
+        android:id="@+id/resetButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/timer_reset"
+        android:src="@drawable/ic_reset"
+        android:alpha="0.35"
+        android:visibility="gone" />
+
 </FrameLayout>
