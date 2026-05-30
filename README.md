@@ -5,9 +5,11 @@ AndRubik aims to enhance the cubing experience by providing essential tools for 
 
 ## Screenshots
 
-<img alt="Scrambler" src="img/Scrambler.jpg" width="256" style="display:inline-block" />
-<img alt="Timer" src="img/Timer.jpg" width="256" style="display:inline-block" />
-<img alt="Settings" src="img/Settings.jpg" width="256" style="display:inline-block" />
+<div style="display: flex; justify-content: space-around;">
+ <img alt="Scrambler" src="img/Scrambler.jpg" width="256" />
+ <img alt="Timer" src="img/Timer.jpg" width="256" />
+ <img alt="Settings" src="img/Settings.jpg" width="256" />
+</div>
 
 <img alt="Sync" src="img/Sync.png" width="320" />
 
