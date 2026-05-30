@@ -39,9 +39,14 @@ async function newScramble() {
     // Interrupt whatever is playing, swap in the new scramble, reset and replay.
     player.pause();
     player.alg = scramble;
-    scrambleEl.textContent = scramble.toString();
+    const text = scramble.toString();
+    scrambleEl.textContent = text;
     player.jumpToStart();
     player.play();
+    // Hand the scramble to the native side so the Timer can attach it to a solve.
+    if (window.AndRubikNative && typeof window.AndRubikNative.onScramble === "function") {
+      window.AndRubikNative.onScramble(text);
+    }
   } catch (err) {
     scrambleEl.textContent = "Scramble error: " + (err && err.message ? err.message : err);
   } finally {

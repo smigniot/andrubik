@@ -2,6 +2,17 @@
     <string name="app_name">AndRubik</string>
     <string name="title_scrambler">Scrambler</string>
     <string name="title_timer">Timer</string>
+    <string name="title_settings">Settings</string>
+
+    <!-- Settings / sync -->
+    <string name="settings_enable_sync">Enable sync</string>
+    <string name="settings_sync_summary">Upload each solve (scramble + time) to your server. Results are kept locally and retried when the server is unreachable.</string>
+    <string name="settings_server_url">Server URL</string>
+    <string name="settings_username">Username</string>
+    <string name="settings_password">Password</string>
+    <string name="settings_save">Save</string>
+    <string name="settings_saved">Settings saved</string>
+    <string name="settings_pending">%1$d result(s) pending sync</string>
 
     <string name="home_subtitle">3x3 Rubik\'s Cube</string>
     <string name="open_scrambler">Scrambler</string>

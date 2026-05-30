@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import io.github.smigniot.andrubik.databinding.FragmentTimerBinding
 import java.util.Locale
 
@@ -31,6 +32,7 @@ class TimerFragment : Fragment() {
     private enum class State { IDLE, READY, RUNNING, STOPPED }
 
     private var binding: FragmentTimerBinding? = null
+    private val viewModel: SyncViewModel by activityViewModels()
     private var state = State.IDLE
     private var startElapsed = 0L
 
@@ -98,12 +100,15 @@ class TimerFragment : Fragment() {
         val b = binding ?: return
         state = State.STOPPED
         b.timeText.removeCallbacks(tick)
-        b.timeText.text = format(SystemClock.elapsedRealtime() - startElapsed)
+        val elapsed = SystemClock.elapsedRealtime() - startElapsed
+        b.timeText.text = format(elapsed)
         b.timerRoot.keepScreenOn = false
         // Keep the result clean for a screenshot: hide the hint, reveal the
         // subtle reset button as the only way to clear the time.
         b.hintText.visibility = View.INVISIBLE
         b.resetButton.visibility = View.VISIBLE
+        // Hand the solve (scramble + time) to the sync pipeline.
+        viewModel.recordSolve(elapsed)
     }
 
     private fun reset() {

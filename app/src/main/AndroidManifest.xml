@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- No INTERNET permission: all cubing.js assets are bundled locally and
-         served via WebViewAssetLoader. Keeps the app offline-only / F-Droid clean. -->
+    <!-- INTERNET is used only for optional, user-configured result sync (Settings).
+         All cubing.js assets remain bundled locally and served via WebViewAssetLoader. -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -10,6 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.AndRubik">
 
         <activity

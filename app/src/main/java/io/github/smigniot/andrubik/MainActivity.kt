@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private enum class Tab(val titleRes: Int, val create: () -> Fragment) {
         SCRAMBLER(R.string.title_scrambler, ::ScramblerFragment),
         TIMER(R.string.title_timer, ::TimerFragment),
+        SETTINGS(R.string.title_settings, ::SettingsFragment),
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

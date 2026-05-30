@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.JavascriptInterface
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewClientCompat
 import io.github.smigniot.andrubik.databinding.FragmentScramblerBinding
@@ -25,6 +27,15 @@ import io.github.smigniot.andrubik.databinding.FragmentScramblerBinding
 class ScramblerFragment : Fragment() {
 
     private var binding: FragmentScramblerBinding? = null
+    private val viewModel: SyncViewModel by activityViewModels()
+
+    /** Receives the current scramble from cubing.js so the Timer can attach it to a solve. */
+    private inner class ScrambleBridge {
+        @JavascriptInterface
+        fun onScramble(scramble: String) {
+            viewModel.currentScramble = scramble
+        }
+    }
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreateView(
@@ -42,6 +53,9 @@ class ScramblerFragment : Fragment() {
         binding.webView.apply {
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
+            // Only our bundled local assets are ever loaded, so exposing this
+            // single-method bridge is safe.
+            addJavascriptInterface(ScrambleBridge(), "AndRubikNative")
             webViewClient = object : WebViewClientCompat() {
                 override fun shouldInterceptRequest(
                     view: WebView,

@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "scramble": {
+      "type": "string",
+      "title": "Scramble",
+      "description": "WCA random-state 3x3 scramble that was timed (WCA/SiGN move notation)"
+    },
+    "timeMs": {
+      "type": "integer",
+      "minimum": 0,
+      "title": "Time (ms)",
+      "description": "Solve duration in milliseconds (authoritative value)"
+    },
+    "time": {
+      "type": "string",
+      "title": "Time",
+      "description": "Human-readable solve time, e.g. \"12.34\" or \"1:02.34\""
+    },
+    "timestamp": {
+      "type": "integer",
+      "minimum": 0,
+      "title": "Recorded at",
+      "description": "When the solve finished, as Unix epoch milliseconds"
+    }
+  },
+  "required": ["scramble", "timeMs", "timestamp"],
+  "additionalProperties": false
+}
