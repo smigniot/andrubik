@@ -17,10 +17,15 @@
       control-panel="none"
       experimental-setup-anchor="start"></twisty-player>
 
-    <pre id="scramble" class="scramble">Loading…</pre>
+    <!-- The alg viewer renders the scramble as individual, clickable moves bound
+         to #player. Clicking a move pauses the animation and rewinds the cube to
+         the state just after that move (the standard scramble.cubing.net UX). -->
+    <twisty-alg-viewer id="scramble" class="scramble" for="player"></twisty-alg-viewer>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
 
     <div class="controls">
-      <button id="play" class="btn" type="button" aria-label="Play scramble">▶ Play</button>
+      <button id="play" class="btn" type="button" aria-label="Play scramble from start">▶ Play</button>
+      <button id="pause" class="btn" type="button" aria-label="Pause or resume animation">⏸</button>
       <div class="speeds" role="group" aria-label="Animation speed">
         <button class="btn speed" type="button" data-speed="0.5">0.5×</button>
         <button class="btn speed" type="button" data-speed="1">1×</button>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -61,6 +62,7 @@ class TimerFragment : Fragment() {
             true
         }
         binding.resetButton.setOnClickListener { reset() }
+        binding.dismissButton.setOnClickListener { onDismissPressed() }
         return binding.root
     }
 
@@ -84,6 +86,8 @@ class TimerFragment : Fragment() {
         b.timeText.text = getString(R.string.timer_initial)
         b.hintText.setText(R.string.timer_ready)
         b.timerRoot.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.timer_bg_ready))
+        // Offer a bail-out from the moment a solve attempt is armed.
+        b.dismissButton.visibility = View.VISIBLE
     }
 
     private fun start() {
@@ -96,19 +100,55 @@ class TimerFragment : Fragment() {
         b.timeText.postOnAnimation(tick)
     }
 
-    private fun stop() {
-        val b = binding ?: return
+    /**
+     * Halts timing and shows the final value, but does NOT record it. Returns the
+     * elapsed milliseconds so the caller decides whether to keep or discard it.
+     */
+    private fun stopTiming(): Long {
+        val b = binding ?: return 0L
         state = State.STOPPED
         b.timeText.removeCallbacks(tick)
         val elapsed = SystemClock.elapsedRealtime() - startElapsed
         b.timeText.text = format(elapsed)
         b.timerRoot.keepScreenOn = false
-        // Keep the result clean for a screenshot: hide the hint, reveal the
-        // subtle reset button as the only way to clear the time.
+        // Keep the result clean for a screenshot: hide the hint and the dismiss
+        // button, reveal the subtle reset button as the only way to clear the time.
         b.hintText.visibility = View.INVISIBLE
+        b.dismissButton.visibility = View.GONE
         b.resetButton.visibility = View.VISIBLE
+        return elapsed
+    }
+
+    private fun stop() {
+        val elapsed = stopTiming()
         // Hand the solve (scramble + time) to the sync pipeline.
         viewModel.recordSolve(elapsed)
+    }
+
+    /** Top-right dismiss button: bail out of the current attempt. */
+    private fun onDismissPressed() {
+        when (state) {
+            State.RUNNING -> confirmDismiss()
+            // Armed but not started: nothing recorded yet, just disarm.
+            State.READY -> reset()
+            State.IDLE, State.STOPPED -> { /* no-op */ }
+        }
+    }
+
+    /**
+     * Stops the timer right away (as any screen tap would, in case the button was
+     * hit by mistake) and asks whether to discard the time. Confirming clears the
+     * timer without recording or syncing; keeping records it like a normal stop.
+     */
+    private fun confirmDismiss() {
+        val elapsed = stopTiming()
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.timer_dismiss_title)
+            .setMessage(R.string.timer_dismiss_message)
+            .setPositiveButton(R.string.timer_dismiss_confirm) { _, _ -> reset() }
+            .setNegativeButton(R.string.timer_dismiss_keep) { _, _ -> viewModel.recordSolve(elapsed) }
+            .setOnCancelListener { viewModel.recordSolve(elapsed) }
+            .show()
     }
 
     private fun reset() {
@@ -118,6 +158,7 @@ class TimerFragment : Fragment() {
         b.hintText.setText(R.string.timer_idle)
         b.hintText.visibility = View.VISIBLE
         b.resetButton.visibility = View.GONE
+        b.dismissButton.visibility = View.GONE
         b.timerRoot.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.timer_bg_idle))
     }
 

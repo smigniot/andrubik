@@ -29,6 +29,21 @@
         android:textSize="18sp"
         android:alpha="0.7" />
 
+    <!-- Subtle dismiss: only shown while arming/running, in the top-right corner.
+         Lets a cuber bail out of a bad attempt (a mis-tap or interruption) by
+         stopping the timer and discarding the time instead of recording it. -->
+    <ImageButton
+        android:id="@+id/dismissButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/timer_dismiss"
+        android:src="@drawable/ic_dismiss"
+        android:alpha="0.35"
+        android:visibility="gone" />
+
     <!-- Subtle reset: only shown once a time is recorded, so an accidental
          screen touch can't dismiss the record. Kept faint/borderless so it
          stays out of the way of a celebratory screenshot. -->

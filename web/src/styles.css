@@ -32,16 +32,30 @@ twisty-player {
 }
 
 .scramble {
+  /* <twisty-alg-viewer> defaults to inline; force the box layout we want. The
+     individual moves render as inline <a> elements that inherit this color, so
+     they show white on the dark background and turn into links (pointer cursor +
+     underline on hover) to signal they're clickable. */
+  display: block;
   width: 100%;
   margin: 0;
   padding: 12px;
   background: #1e1e1e;
   border-radius: 8px;
+  color: #fff;
   font-size: 1.15rem;
-  line-height: 1.5;
+  line-height: 1.6;
   text-align: center;
-  white-space: pre-wrap;
   word-break: break-word;
+}
+
+.status {
+  width: 100%;
+  margin: 0;
+  min-height: 1.2em;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #bbb;
 }
 
 .controls {
@@ -64,6 +78,10 @@ twisty-player {
 #play {
   flex: 0 0 auto;
   background: #0051ba;
+}
+
+#pause {
+  flex: 0 0 auto;
 }
 
 .speeds {

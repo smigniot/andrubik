@@ -24,4 +24,9 @@
     <string name="timer_tap_to_stop">Tap to stop</string>
     <string name="timer_initial">0.00</string>
     <string name="timer_reset">Reset timer</string>
+    <string name="timer_dismiss">Dismiss without recording</string>
+    <string name="timer_dismiss_title">Dismiss this solve?</string>
+    <string name="timer_dismiss_message">Are you sure you want to dismiss that record? The time will be discarded and not synced.</string>
+    <string name="timer_dismiss_confirm">Dismiss</string>
+    <string name="timer_dismiss_keep">Keep</string>
 </resources>
