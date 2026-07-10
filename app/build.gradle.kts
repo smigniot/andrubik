@@ -50,7 +50,7 @@ android {
     // (no keystore burden; F-Droid signs it downstream).
     applicationVariants.all {
         val variant = this
-        val suffix = if (variant.buildType.isSigningReady) variant.name else "${variant.name}-unsigned"
+        val suffix = if (variant.signingConfig != null) variant.name else "${variant.name}-unsigned"
         variant.outputs.all {
             (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
                 "AndRubik-${variant.versionName}-$suffix.apk"
