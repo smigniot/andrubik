@@ -44,6 +44,18 @@ android {
         includeInApk = false
         includeInBundle = false
     }
+
+    // Human-friendly APK names, e.g. AndRubik-0.1.0-debug.apk /
+    // AndRubik-0.1.0-release-unsigned.apk. Release stays unsigned on purpose
+    // (no keystore burden; F-Droid signs it downstream).
+    applicationVariants.all {
+        val variant = this
+        val suffix = if (variant.buildType.isSigningReady) variant.name else "${variant.name}-unsigned"
+        variant.outputs.all {
+            (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
+                "AndRubik-${variant.versionName}-$suffix.apk"
+        }
+    }
 }
 
 dependencies {
