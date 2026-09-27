@@ -1,0 +1,1 @@
+Add F-Droid store metadata and verify the Gradle download checksum.
