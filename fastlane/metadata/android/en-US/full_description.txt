@@ -1,0 +1,10 @@
+AndRubik is an app for Rubik's Cube fans, focused on the standard 3x3 cube.
+
+<b>Features</b>
+<ul>
+<li><b>Scrambler</b>: random-state scrambles with an interactive 3D cube view, inspired by cubing.js</li>
+<li><b>Timer</b>: made for use with a cube in hand. Touch the screen, and the timer starts when your hand leaves it. Touch again to stop.</li>
+<li><b>Sync</b>: optional JSON sync of your times, tested with a Kinto Storage backend</li>
+</ul>
+
+A camera-based solver is planned.
