@@ -6,6 +6,8 @@ local.properties
 *.aab
 *.keystore
 *.jks
+*.p12
+signing.properties
 captures/
 .cxx/
 .claude
@@ -22,3 +24,6 @@ web/node_modules/
 .idea/
 *.iml
 .DS_Store
+
+# Release outputs (scripts/build.sh)
+dist/

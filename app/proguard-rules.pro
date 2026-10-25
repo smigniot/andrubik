@@ -1,2 +1,5 @@
-# Keep WebView JS interface bridge members (added in later phases).
-# No app-specific rules required for Phase 0.
+# Keep WebView JS interface bridge members (ScrambleBridge, exposed to JS as
+# AndRubikNative): they are only called by name from JavaScript.
+-keepclassmembers class * {
+    @android.webkit.JavascriptInterface <methods>;
+}

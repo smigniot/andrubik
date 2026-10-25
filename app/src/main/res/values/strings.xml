@@ -12,6 +12,7 @@
     <string name="settings_password">Password</string>
     <string name="settings_save">Save</string>
     <string name="settings_saved">Settings saved</string>
+    <string name="settings_url_https_only">Server URL must start with https://</string>
     <string name="settings_pending">%1$d result(s) pending sync</string>
 
     <string name="home_subtitle">3x3 Rubik\'s Cube</string>

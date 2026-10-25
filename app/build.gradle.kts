@@ -11,13 +11,18 @@ android {
         applicationId = "io.github.smigniot.andrubik"
         minSdk = 24
         targetSdk = 35
-        versionCode = 2
-        versionName = "0.1.1"
+        versionCode = 3
+        versionName = "0.1.2"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            // Reproducible builds: don't embed git metadata (META-INF/version-control-info.textproto).
+            vcsInfo {
+                include = false
+            }
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -46,8 +51,9 @@ android {
     }
 
     // Human-friendly APK names, e.g. AndRubik-0.1.0-debug.apk /
-    // AndRubik-0.1.0-release-unsigned.apk. Release stays unsigned on purpose
-    // (no keystore burden; F-Droid signs it downstream).
+    // AndRubik-0.1.0-release-unsigned.apk. Release stays unsigned on purpose:
+    // F-Droid rebuilds it unsigned, and scripts/sign.sh signs it outside Gradle
+    // so the key never touches the build machine.
     applicationVariants.all {
         val variant = this
         val suffix = if (variant.signingConfig != null) variant.name else "${variant.name}-unsigned"

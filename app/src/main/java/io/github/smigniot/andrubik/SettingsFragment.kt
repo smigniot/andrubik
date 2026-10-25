@@ -30,8 +30,14 @@ class SettingsFragment : Fragment() {
         binding.passInput.setText(settings.password)
 
         binding.saveButton.setOnClickListener {
+            val url = binding.urlInput.text?.toString()?.trim().orEmpty()
+            // Cleartext traffic is disabled app-wide: only https:// servers can work.
+            if (url.isNotEmpty() && !url.startsWith("https://", ignoreCase = true)) {
+                binding.urlInput.error = getString(R.string.settings_url_https_only)
+                return@setOnClickListener
+            }
             settings.syncEnabled = binding.syncCheckbox.isChecked
-            settings.serverUrl = binding.urlInput.text?.toString()?.trim().orEmpty()
+            settings.serverUrl = url
             settings.username = binding.userInput.text?.toString().orEmpty()
             settings.password = binding.passInput.text?.toString().orEmpty()
             Toast.makeText(requireContext(), R.string.settings_saved, Toast.LENGTH_SHORT).show()

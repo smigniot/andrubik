@@ -1,0 +1,1 @@
+Reproducible build signed by the developer. Enable R8 code shrinking. Sync now requires an https:// server (cleartext traffic disabled).
